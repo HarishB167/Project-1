@@ -1,0 +1,135 @@
+package com.marketstatistics;
+
+import android.widget.*;
+
+import android.content.Intent;
+import android.widget.ListView.OnItemClickListener;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.marketstatistics.DBAdapter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+public class MyListActivity extends SherlockActivity
+{
+    private ListView listView;
+
+    /*private TextView timeTV, dateTV;
+	private Button mBtn;
+	private String date;
+	private EditText itemET, priceMaxET, priceMinET;*/
+
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+	{
+		DBAdapter.init(this);
+        super.onCreate(savedInstanceState);
+        /*setContentView(R.layout.main);
+
+		timeTV = (TextView) findViewById(R.id.timeTextView);
+		dateTV = (TextView) findViewById(R.id.dateTextView);
+		itemET = (EditText) findViewById(R.id.itemEditText);
+		priceMaxET = (EditText) findViewById(R.id.priceMaxEditText);
+		priceMinET = (EditText) findViewById(R.id.priceMinEditText);
+
+		setTimeAndDate();
+
+		mBtn = (Button) findViewById(R.id.mButton);
+		mBtn.setOnClickListener(mBtnListener);
+		*/
+		// TODO: Implement this method
+		setContentView(R.layout.main_b);
+
+		listView = (ListView) findViewById(android.R.id.list);
+		//listView.setOnItemClickListener(lVListener);
+
+		//fillData();
+		registerForContextMenu(listView);
+    }
+
+	/*private void fillData()
+	{
+		Cursor userCursorS = DBAdapter.getAllPrimeSearch2();
+		startManagingCursor(userCursorS);
+
+		// Create an array to specify the fields we want (only the TITLE)
+		String[] title = new String[] { DBAdapter.KEY_SEARCH_NO };
+
+		// and an array of the fields we want to bind in the view
+		int[] textView = new int[] { R.id.text1 };
+
+		// Now create a simple cursor adapter and set it to display
+		SimpleCursorAdapter userDS = new SimpleCursorAdapter(this, R.layout.prime_row, userCursorS, title, textView);
+		listView.setAdapter(userDS);
+	}
+
+	OnItemClickListener lVListener = new OnItemClickListener()
+	{
+		@Override
+		public void onItemClick(AdapterView<?> adapterV, View v, int index, long l)
+		{
+			getList(l);
+		}
+	};
+
+	private void getList(long l)
+	{
+		// TODO: Implement this method
+		Cursor mCursor = DBAdapter.fetchPrimeData(l);
+		String searchNo = mCursor.getString(mCursor.getColumnIndexOrThrow(DBAdapter.KEY_SEARCH_NO));
+		try
+		{
+			Intent i = new Intent(this, PrimeList.class);
+			i.putExtra("Search", searchNo);
+			startActivity(i);
+		}
+		catch (RuntimeException e)
+		{
+			Toast.makeText(this, "Error ...", Toast.LENGTH_SHORT).show();
+		}
+	}*/
+
+	/*private void setTimeAndDate()
+	{
+		// TODO: Implement this method
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		date = dateFormat.format(Calendar.getInstance().getTime());
+		dateTV.setText(date);
+
+		SimpleDateFormat timeFormat = new SimpleDateFormat("kk:mm");
+		String time = timeFormat.format(Calendar.getInstance().getTime());
+		timeTV.setText(time);
+	}*/
+
+	// edit selected search
+	/*public OnClickListener mBtnListener = new OnClickListener()
+	{
+		@Override
+		public void onClick(View v)
+		{
+			if (itemET.getText().toString().length() > 0 && priceMaxET.getText().toString().length() > 0 && priceMinET.getText().toString().length() > 0)
+			{
+				if (Integer.parseInt(priceMaxET.getText().toString()) > Integer.parseInt(priceMinET.getText().toString()))
+				{
+					DBAdapter.addUserData(new UserData(itemET.getText().toString(), "₹ " + priceMaxET.getText().toString(), "₹ " + priceMinET.getText().toString(), date));
+					setResult(RESULT_OK);
+					finish();
+				}
+				else
+				{
+					Toast.makeText(MainActivity.this, "Price entered in 'Min' must lower than of'Max'", Toast.LENGTH_SHORT).show();
+					priceMinET.setText("");
+					priceMinET.requestFocus();
+				}
+			}
+			else
+			{
+				Toast.makeText(MainActivity.this, "First fill the fields", Toast.LENGTH_SHORT).show();
+			}
+		}
+	};*/
+}
