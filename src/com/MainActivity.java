@@ -1,3 +1,0 @@
-pubic class MainActivity
-{
-}
